@@ -1,0 +1,39 @@
+<div>
+  <h1>
+    <span>Client</span>
+
+  </h1>
+
+  <%= link_to "Add New Client", new_client_path, class: 'add_new' %>
+
+  <p></p>
+  <hr>
+
+  <table class="table table-bordered" border="1" width="100%" style="border-collapse: collapse;">
+    <thead>
+    <tr>
+      <th>Client Title</th>
+      <th>Description</th>
+      <th>Edit</th>
+      <th>Delete</th>
+
+    </tr>
+    </thead>
+    <tbody>
+
+    <%- @client.each do |c| %>
+        <tr>
+          <td><%= c.title %></td>
+          <td><%= c.description %></td>
+          <td>
+            <%= link_to "Edit", edit_client_path(c.id), class: 'btn btn-success edit_city' %></td>
+          <td>
+            <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this city?'}, class: 'btn btn-danger edit_city' %>
+          </td>
+    <% end %>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>

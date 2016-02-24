@@ -1,0 +1,15 @@
+<%= form_for @product, url: product_area_index_path do |f| %>
+
+
+    <div class="form-group">
+
+      <%= f.label :product_area %>
+      <%= f.text_field :product_area, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :product_description %>
+      <%= f.text_field :product_description, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+    <%= f.submit f.object.new_record? ? 'Save' : 'Update', class: 'btn btn-primary city_btn' %>
+<% end %>

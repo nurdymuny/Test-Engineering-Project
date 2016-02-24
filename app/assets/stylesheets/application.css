@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker3
  */
 .login{
     margin-left:35%;
@@ -27,4 +28,84 @@
 #user_password_confirmation{
     width: 30%;
     padding: 3px;
+}
+
+#menu {
+    width: auto;
+    height: 35px;
+    font-size: 16px;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 3px 2px 3px #333333;
+    background-color: blue;
+    border-radius: 8px;
+}
+
+#menu ul {
+    height: auto;
+    padding: 8px 0px;
+    margin: 0px;
+}
+
+#menu li {
+    display: inline;
+    padding: 20px;
+}
+
+#menu a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 8px 8px 8px;
+}
+
+#menu li {
+    display: inline;
+    padding: 20px;
+}
+
+#menu a {
+    text-decoration: none;
+    color: white;
+    padding: 8px 8px 8px 8px;
+}
+
+ul {
+    margin-left: -45% !important;
+}
+
+.add_new {
+    float: right;
+}
+
+#feature_request_client_id {
+    width: 50%;
+    height: 30px;
+    border: 0.5px solid black;
+}
+
+#feature_request_product_id {
+    width: 50%;
+    height: 30px;
+    border: 0.5px solid black;
+}
+
+#user_name {
+    width: 30%;
+    height: 30px;
+}
+
+#user_first_name {
+    width: 30%;
+    height: 30px;
+}
+
+#user_last_name {
+    width: 30%;
+    height: 30px;
+}
+
+#user_joining_date {
+    width: 30%;
+    height: 30px;
 }

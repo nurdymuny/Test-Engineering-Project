@@ -1,0 +1,40 @@
+<%= form_for @feature, url: feature_request_index_path do |f| %>
+
+
+    <div class="form-group">
+
+      <%= f.label :title %>
+      <%= f.text_field :title, placeholder: '', class: 'form-control', :required => 'required' %>
+
+
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_field :description, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :client_id %><br>
+      <%= f.collection_select(:client_id, Client.all, :id, :title, :prompt => true) %>
+    </div>
+    <div class="form-group">
+      <%= f.label :client_priority %>
+      <%= f.text_field :client_priority, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :target_date %>
+      <%= f.date_field :target_date, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+    <div class="form-group">
+      <%= f.label :ticket_url %>
+      <%= f.text_field :ticket_url, placeholder: '', class: 'form-control', :required => 'required' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :Product_area %><br>
+      <%= f.collection_select(:product_id, ProductArea.all, :id, :product_area, :prompt => true) %>
+    </div>
+
+    <%= f.submit f.object.new_record? ? 'Save' : 'Update', class: 'btn btn-primary city_btn' %>
+<% end %>

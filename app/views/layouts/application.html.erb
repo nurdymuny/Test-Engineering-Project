@@ -10,9 +10,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="container">
+  <p></p>
+  <% if user_signed_in? %>
+      <div id="menu">
+        <ul>
+          <li><%= link_to "Request", feature_request_index_path, method: :get %></li>
+          <li><%= link_to "Staff", staffs_staff_list_path, method: :get %></li>
+          <li><%= link_to "Product Area", product_area_index_path, method: :get %></li>
+          <li><%= link_to "Client", clients_path, method: :get %></li>
 
-<%= yield %>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
+          <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
+        </ul>
+      </div>
+  <% end %>
+  <p class="notice"><%= notice %></p>
+
+  <p class="alert"><%= alert %></p>
+  <%= yield %>
+
+</div>
 </body>
 </html>

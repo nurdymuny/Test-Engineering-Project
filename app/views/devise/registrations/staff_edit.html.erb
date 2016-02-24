@@ -1,0 +1,33 @@
+<h1 style="margin-left: 2%;">Edit Staff</h1>
+<hr>
+
+<%= form_for(@staff, as: resource_name, url: 'update_staff', html: {method: :put}) do |f| %>
+
+
+    <div class="field">
+      <%= f.label :first_name %><br/>
+      <%= f.text_field :first_name, autofocus: true %>
+      <%= hidden_field_tag "id", @staff.id %>
+    </div>
+
+    <div class="field">
+      <%= f.label :last_name %><br/>
+      <%= f.text_field :last_name, autofocus: true %>
+    </div>
+
+    <div class="field">
+      <%= f.label :joining_date %><br/>
+      <%= f.date_field :joining_date, autofocus: true %>
+    </div>
+    <div class="field">
+      <%= f.label :email, :class => 'email' %><br/>
+      <%= f.email_field :email, autofocus: true, :required => true %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit "Save", class: 'login_btn', id: 'manager_login_btn' %>
+    </div>
+<% end %>
+
+
