@@ -69,9 +69,11 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :clients
+  get 'clients/register' => 'clients#register'
   resources :feature_request
   get '/deactive_request' => 'feature_request#deactive_request', :as => 'deactive_request'
   get '/activate_request' => 'feature_request#activate_request', :as => 'activate_request'
+  post 'feature_request/complete_request' => 'feature_request#complete_request'
   resources :product_area
 
 end

@@ -3,6 +3,7 @@ class ClientsController < ApplicationController
     @clients = Client.all()
   end
 
+
   def show
     @client = Client.all()
   end
@@ -12,8 +13,11 @@ class ClientsController < ApplicationController
   end
 
   def create
-    client_params[:state] = client_params[:title].strip()
-    client_params[:city] = client_params[:description].strip()
+    client_params[:title] = client_params[:title].strip()
+    client_params[:description] = client_params[:description].strip()
+    client_params[:first_name] = client_params[:first_name].strip()
+    client_params[:last_name] = client_params[:last_name].strip()
+    client_params[:email] = client_params[:email].strip()
 
     @client = Client.new(client_params)
     if @client.save
@@ -24,13 +28,17 @@ class ClientsController < ApplicationController
     end
   end
 
+
   def edit
     @clients = Client.find(params[:id])
   end
 
   def update
-    client_params[:state] = client_params[:title].strip()
-    client_params[:city] = client_params[:description].strip()
+    client_params[:title] = client_params[:title].strip()
+    client_params[:description] = client_params[:description].strip()
+    client_params[:first_name] = client_params[:first_name].strip()
+    client_params[:last_name] = client_params[:last_name].strip()
+    client_params[:email] = client_params[:email].strip()
 
     @client = Client.find(params[:id])
     if @client.update_attributes(client_params)
@@ -53,6 +61,6 @@ class ClientsController < ApplicationController
 
   private
   def client_params
-    params.require(:client).permit(:title, :description)
+    params.require(:client).permit(:first_name, :last_name, :email, :title, :description)
   end
 end

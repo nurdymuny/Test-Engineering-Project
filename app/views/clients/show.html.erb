@@ -26,9 +26,9 @@
           <td><%= c.title %></td>
           <td><%= c.description %></td>
           <td>
-            <%= link_to "Edit", edit_client_path(c.id), class: 'btn btn-success edit_city' %></td>
+            <%= link_to "Edit", edit_client_path(c.id), class: 'btn btn-success ' %></td>
           <td>
-            <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this city?'}, class: 'btn btn-danger edit_city' %>
+            <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this client?'}, class: 'btn btn-danger' %>
           </td>
     <% end %>
     </tr>

@@ -1,42 +1,46 @@
+
 <div>
+
   <h1>
-    <span>Client</span>
-
   </h1>
+  <%= link_to "Register", new_client_path, class: 'add_new btn btn-success' %>
 
-  <%= link_to "Add New Client", new_client_path, class: 'add_new' %>
+  <% if @clients.blank? %>
+      <p style="text-align: center; font-size: 18px;">No record found.</p>
+  <% else %>
 
-  <p></p>
-  <hr>
-
-  <table class="table table-bordered" border="1" width="100%" style="border-collapse: collapse;">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Email</th>
-      <th>Client Title</th>
-      <th>Description</th>
-      <th>Edit</th>
-      <th>Delete</th>
-
-    </tr>
-    </thead>
-    <tbody>
-
-    <%- @clients.each do |c| %>
+      <p></p>
+      <hr>
+      <table class="table table-bordered" border="" width="100%" style="border-collapse: collapse;">
+        <thead>
         <tr>
-          <td><%= c.title %></td>
-          <td><%= c.description %></td>
-          <td>
-            <%= link_to "Edit", edit_client_path(c.id), class: 'btn btn-success' %></td>
-          <td>
-            <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this client?'}, class: 'btn btn-danger' %>
-          </td>
-    <% end %>
-    </tr>
-    </tbody>
-  </table>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Email</th>
+          <th>Client Title</th>
+          <th>Description</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%- @clients.each do |c| %>
+            <tr>
+              <td><%= c.first_name %></td>
+              <td><%= c.last_name %></td>
+              <td><%= c.email %></td>
+              <td><%= c.title %></td>
+              <td><%= c.description %></td>
+              <td>
+                <%= link_to "Edit", edit_client_path(c.id), class: 'btn btn-success' %></td>
+              <td>
+                <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this client?'}, class: 'btn btn-danger' %>
+              </td>
+        <% end %>
+        </tr>
+        </tbody>
+      </table>
+  <% end %>
 </div>
 </div>
 </div>

@@ -37,14 +37,14 @@
     font-family: Tahoma, Geneva, sans-serif;
     font-weight: bold;
     text-align: center;
-    text-shadow: 3px 2px 3px #333333;
-    background-color: blue;
+    /*text-shadow: 3px 2px 3px #333333;*/
+    background-color: #5cb85c;
     border-radius: 8px;
 }
 
 #menu ul {
     height: auto;
-    padding: 8px 0px;
+    padding: 7px 0px;
     margin: 0px;
 }
 
@@ -78,6 +78,9 @@ ul {
     float: right;
 }
 
+.add_new_cls {
+    float: right;
+}
 #feature_request_client_id {
     width: 50%;
     height: 30px;

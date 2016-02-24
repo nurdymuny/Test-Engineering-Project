@@ -35,5 +35,5 @@
       <%= f.collection_select(:product_id, ProductArea.all, :id, :product_area, :prompt => true) %>
     </div>
 
-    <%= f.submit f.object.new_record? ? 'Save' : 'Update', class: 'btn btn-primary city_btn' %>
+    <%= f.submit f.object.new_record? ? 'Save' : 'Update', class: 'btn btn-primary' %>
 <% end %>

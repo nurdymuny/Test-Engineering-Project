@@ -32,3 +32,19 @@
 </div>
 </body>
 </html>
+<script>
+
+    $(".notice").fadeOut(8000);
+    $(document).ready(function () {
+        $('#menu a').each(function (index) {
+            if (this.href.trim() == window.location)
+                $(this).addClass("active");
+        });
+    });
+
+</script>
+<style>
+    .active {
+        background-color: #d9534f;
+    }
+</style>

@@ -1,51 +1,51 @@
 <div>
   <h1>
     <span>Staff</span>
-
   </h1>
+  <%= link_to "Add +", staff_new_path, class: 'add_new_cls' %>
+  <% if @staff.blank? %>
+      <p style="text-align: center; font-size: 18px;">No record found.</p>
+  <% else %>
 
-  <%= link_to "Add +", staff_new_path, class: 'add_new manager_cls' %>
+      <p></p>
 
-  <p></p>
-  <hr>
-
-  <table class="table table-bordered" border="1" width="100%" style="border-collapse: collapse;" id="manager_tab">
-    <thead>
-    <tr>
-      <th>First Name</th>
-      <th>Last Name</th>
-      <th>Date of Joining</th>
-      <th>Email</th>
-      <th>Edit</th>
-      <th>Delete</th>
-    </tr>
-    </thead>
-    <tbody>
-
-    <%- @staff.each do |c| %>
+      <table class="table table-bordered" border="1" width="100%" style="border-collapse: collapse;" id="tab">
+        <thead>
         <tr>
-          <td>
-            <%= c.first_name %>
-          </td>
-          <td>
-            <%= c.last_name %>
-          </td>
-          <td>
-            <%= c.joining_date %>
-          </td>
-          <td>
-            <%= c.email %>
-          </td>
-          <td>
-            <%= link_to "Edit", staffs_staff_edit_path(:id => c.id), class: 'btn btn-success' %>
-          </td>
-          <td>
-            <%= link_to "Delete", staffs_destroy_path(:id => c.id), method: :delete, data: {confirm: 'Are you sure you want to delete this staff?'}, class: 'btn btn-danger' %>
-          </td>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Date of Joining</th>
+          <th>Email</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
-    <% end %>
-    </tbody>
-  </table>
+        </thead>
+        <tbody>
+        <%- @staff.each do |c| %>
+            <tr>
+              <td>
+                <%= c.first_name %>
+              </td>
+              <td>
+                <%= c.last_name %>
+              </td>
+              <td>
+                <%= c.joining_date %>
+              </td>
+              <td>
+                <%= c.email %>
+              </td>
+              <td>
+                <%= link_to "Edit", staffs_staff_edit_path(:id => c.id), class: 'btn btn-success' %>
+              </td>
+              <td>
+                <%= link_to "Delete", staffs_destroy_path(:id => c.id), method: :delete, data: {confirm: 'Are you sure you want to delete this record?'}, class: 'btn btn-danger' %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+  <% end %>
 </div>
 </div>
 </div>

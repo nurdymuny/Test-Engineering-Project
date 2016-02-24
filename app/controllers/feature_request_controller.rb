@@ -1,11 +1,11 @@
 class FeatureRequestController < ApplicationController
-
+  skip_before_action :verify_authenticity_token
   def index
     if user_signed_in?
       if current_user.is_staff == 0
-        @feature = FeatureRequest.select("feature_requests.*, clients.title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id")
+        @feature = FeatureRequest.select("feature_requests.*, clients.title AS client_title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id")
       else
-        @feature = FeatureRequest.select("feature_requests.*, clients.title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id").where("feature_requests.user_id = #{current_user.id}")
+        @feature = FeatureRequest.select("feature_requests.*, clients.title AS client_title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id").where("feature_requests.user_id = #{current_user.id}")
       end
     else
       redirect_to new_user_session_path
@@ -18,18 +18,50 @@ class FeatureRequestController < ApplicationController
   end
 
   def create
-    request_params[:title] = request_params[:title].strip()
-    request_params[:description] = request_params[:description].strip()
-    request_params[:client_id] = request_params[:client_id]
-    request_params[:client_priority] = request_params[:client_priority]
-    request_params[:target_date] = request_params[:target_date]
-    request_params[:ticket_url] = request_params[:ticket_url].strip()
-    request_params[:product_id] = request_params[:product_id]
+    request_params[:title] = params[:feature_request][:title].strip()
+    request_params[:description] = params[:feature_request][:description].strip()
+    request_params[:client_id] = params[:feature_request][:client_id]
+    request_params[:client_priority] = params[:feature_request][:client_priority]
+    request_params[:target_date] = params[:feature_request][:target_date]
+    request_params[:ticket_url] = params[:feature_request][:ticket_url].strip()
+    request_params[:product_id] = params[:feature_request][:product_id]
     @user_id = current_user.id
-    @feature_req = FeatureRequest.where(client_priority: request_params[:client_priority])
-    if @feature_req.count > 0
-      flash[:notice] = "Client Priority already exist. Please change client priority."
-      redirect_to new_feature_request_path
+    if params[:feature_request][:client_priority].to_i == 1
+      @feature_req = FeatureRequest.where(client_id: params[:feature_request][:client_id]).where("status=0")
+      if @feature_req.present?
+        if @feature_req.map(&:client_priority).include? 1
+          @feature_req.each do |req|
+            req.client_priority = req.client_priority + 1
+            req.save
+          end
+          @feature = FeatureRequest.new(request_params)
+          if @feature.save
+            @feature.update_attribute(:user_id, @user_id)
+            flash[:notice] = "Successfully created"
+            redirect_to feature_request_index_path
+          else
+            render :new
+          end
+        else
+          @feature = FeatureRequest.new(request_params)
+          if @feature.save
+            @feature.update_attribute(:user_id, @user_id)
+            flash[:notice] = "Successfully created"
+            redirect_to feature_request_index_path
+          else
+            render :new
+          end
+        end
+      else
+        @feature = FeatureRequest.new(request_params)
+        if @feature.save
+          @feature.update_attribute(:user_id, @user_id)
+          flash[:notice] = "Successfully created"
+          redirect_to feature_request_index_path
+        else
+          render :new
+        end
+      end
     else
       @feature = FeatureRequest.new(request_params)
       if @feature.save
@@ -40,6 +72,7 @@ class FeatureRequestController < ApplicationController
         render :new
       end
     end
+
   end
 
   def edit
@@ -47,13 +80,13 @@ class FeatureRequestController < ApplicationController
   end
 
   def update
-    request_params[:title] = request_params[:title].strip()
-    request_params[:description] = request_params[:description].strip()
-    request_params[:client_id] = request_params[:client_id]
-    request_params[:client_priority] = request_params[:client_priority]
-    request_params[:target_date] = request_params[:target_date]
-    request_params[:ticket_url] = request_params[:ticket_url].strip()
-    request_params[:product_id] = request_params[:product_id]
+    request_params[:title] = params[:feature_request][:title].strip()
+    request_params[:description] = params[:feature_request][:description].strip()
+    request_params[:client_id] = params[:feature_request][:client_id]
+    request_params[:client_priority] = params[:feature_request][:client_priority]
+    request_params[:target_date] = params[:feature_request][:target_date]
+    request_params[:ticket_url] = params[:feature_request][:ticket_url].strip()
+    request_params[:product_id] = params[:feature_request][:product_id]
 
     @feature = FeatureRequest.find(params[:id])
     if @feature.update_attributes(request_params)
@@ -77,8 +110,16 @@ class FeatureRequestController < ApplicationController
   def deactive_request
     @feature = FeatureRequest.find(params[:id])
     if @feature.update_attribute(:status, 1)
+      @feature_req = FeatureRequest.where(client_id: @feature.client_id).where("status=0")
+      # raise @feature_req.inspect
+      if @feature_req.present?
+        @feature_req.each do |req|
+          req.client_priority = req.client_priority - 1
+          req.save
+        end
       flash[:notice] = "Successfully updated"
       redirect_to feature_request_index_path
+      end
     else
       render :edit
     end
@@ -94,6 +135,17 @@ class FeatureRequestController < ApplicationController
     end
   end
 
+  def complete_request
+    if current_user.is_staff == 0
+      @feature = FeatureRequest.select("feature_requests.*, clients.title AS client_title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id").where("feature_requests.status=1")
+    else
+      if params[:status] == 'complete'
+        @feature = FeatureRequest.select("feature_requests.*, clients.title AS client_title, product_areas.product_area, users.first_name").joins("INNER JOIN clients ON feature_requests.client_id=clients.id").joins("INNER JOIN product_areas ON feature_requests.product_id=product_areas.id").joins("INNER JOIN users on users.id=feature_requests.user_id").where("feature_requests.status=1")
+      end
+    end
+  else
+    redirect_to new_user_session_path
+  end
 
   private
   def request_params
