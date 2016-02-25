@@ -1,11 +1,11 @@
 Assumptions:
+
 1. There will be a client who would registered from the company’s marketing website. Once the client registered we assume that he/she has purchased a customise company product.
-
 2. I also assume that this system would have a superuser who would initially registered his/her company staff member.
-
 3. In the staff login I have assumed that all the feature request will begin and complete in order of their priority set by the staff member.
 
 Technologies Used for Development:
+
 1. Ruby on Rails [RoR]
 2. Jquery
 3. Bootstrap
@@ -13,11 +13,14 @@ Technologies Used for Development:
 
 
 Popular Ruby Gems Used:
+
 1. Devise [for managing login/logout user sessions]
 
 
 Admin:
+
 Admin is that person of the company who either owns the company or manages the company on behalf of its owner.
+
 1. Login: An Admin can either registered for a new superuser account or login using his/her existing credentials. He/she can also we set their password against they forget it.
 2. Feature Request: This is a list of all the request that have been made by the company clients. Each request displays the name of the staff members who raise that request ticket and a current status of that request. It is to be noted that admin can only edit and delete a request but not create a request.
 3. Staff: An admin can create profiles for new staff members that join the company. This feature is only available to admin.
@@ -25,6 +28,7 @@ Admin is that person of the company who either owns the company or manages the c
 5. Client: This is a list of all the client that the company currently has. Its simply displays the name and contact details of the each client.
 
 Staff:
+
 Staff member is any person who works within the company and provides a assistance to clients from time to time.
 
 1. Login: Staff member can only login but cannot create his/her own account.
@@ -33,10 +37,13 @@ Staff member is any person who works within the company and provides a assistanc
 4. Client: This is a list of all the client that the company currently has. Its simply displays the name and contact details of the each client.
 
 Client:
+
 Client is any person who buys the company product or services.
+
 1. Registration: Client can register his personal details with the company.
 
 
 Website Links:
+
 1. For Client: http://54.204.6.240/clients
 2. For Admin/Staff: http://54.204.6.240/users/sign_in
