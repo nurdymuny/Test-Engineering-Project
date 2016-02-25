@@ -1,0 +1,74 @@
+<div>
+  <h1>
+    <span>Request</span><br>
+    <%= link_to "Completed", complete_request_path, class: '' %>
+  </h1>
+  <% if current_user.is_staff == 1 %>
+      <%= link_to "Add New Request", new_feature_request_path, class: 'add_new' %>
+  <% end %>
+  <% if @feature.blank? %>
+      <p style="text-align: center; font-size: 18px;">No record found.</p>
+  <% else %>
+
+
+      <p></p>
+      <hr>
+
+      <table class="table table-bordered" border="1" width="100%" style="border-collapse: collapse;">
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Client</th>
+          <th>Client Priority</th>
+          <th>Target Date</th>
+          <th>Ticket URL</th>
+          <th>Product Area</th>
+          <th>Staff Name</th>
+          <th>Status</th>
+          <th>Edit</th>
+          <th>Delete</th>
+
+        </tr>
+        </thead>
+        <tbody>
+
+        <%- @feature.each do |c| %>
+            <tr>
+              <td><%= c.title %></td>
+              <td><%= c.description %></td>
+              <td><%= c.client_title %></td>
+              <td><%= c.client_priority %></td>
+              <td><%= c.target_date %></td>
+              <td><%= c.ticket_url %></td>
+              <td><%= c.product_area %></td>
+              <td><%= c.first_name %></td>
+              <% if current_user.is_staff == 1 %>
+                  <% if c.status == 0 %>
+                      <td><%= link_to "Begin", deactive_request_path(:id => c.id), data: {confirm: 'Are you sure! you want to activate this request?'}, class: 'btn btn-success' %></td>
+
+                  <% else %>
+                      <td><%= link_to "Completed" %></td>
+                  <% end %>
+              <% else %>
+                  <td>
+                    <% if c.status == 0 %>
+                        <span style="color:green;"> Pending </span>
+                    <% else %>
+                        <span style="color:red;">Completed</span>
+                        </td>
+                    <% end %>
+              <% end %>
+              <td>
+                <%= link_to "Edit", edit_feature_request_path(c.id), class: 'btn btn-success' %></td>
+              <td>
+                <%= link_to "Delete", c, method: :delete, data: {confirm: 'Are you sure you want to delete this request?'}, class: 'btn btn-danger' %>
+              </td>
+        <% end %>
+        </tr>
+        </tbody>
+      </table>
+  <% end %>
+</div>
+</div>
+</div>
