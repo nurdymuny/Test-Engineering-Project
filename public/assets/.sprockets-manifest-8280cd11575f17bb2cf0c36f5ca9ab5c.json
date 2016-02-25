@@ -1,0 +1,30 @@
+{
+  "files": {
+    "page_bg_blur02-d31baee858618d362898042d1945995b2bb8dcc83c34e75aabcedfb600b378bd.jpg": {
+      "logical_path": "page_bg_blur02.jpg",
+      "mtime": "2016-02-24T19:51:22+05:30",
+      "size": 77541,
+      "digest": "d31baee858618d362898042d1945995b2bb8dcc83c34e75aabcedfb600b378bd",
+      "integrity": "sha256-0xuu6FhhjTYomAQtGUWZWyu43Mg8NOdaq87ftgCzeL0="
+    },
+    "application-5ae51116e00f948ea48fd06f9f276e0d135ff08c37b4b87dc155f306fca205be.js": {
+      "logical_path": "application.js",
+      "mtime": "2016-02-24T21:43:46+05:30",
+      "size": 204527,
+      "digest": "5ae51116e00f948ea48fd06f9f276e0d135ff08c37b4b87dc155f306fca205be",
+      "integrity": "sha256-WuURFuAPlI6kj9BvnyduDRNf8Iw3tLh9wVXzBvyiBb4="
+    },
+    "application-5fa5430c470f610c05669af9e7191246e1371fe0fcd4ad2d5c39adde0a4dc788.css": {
+      "logical_path": "application.css",
+      "mtime": "2016-02-24T21:43:46+05:30",
+      "size": 27846,
+      "digest": "5fa5430c470f610c05669af9e7191246e1371fe0fcd4ad2d5c39adde0a4dc788",
+      "integrity": "sha256-X6VDDEcPYQwFZpr55xkSRuE3H+D81K0tXDmt3gpNx4g="
+    }
+  },
+  "assets": {
+    "page_bg_blur02.jpg": "page_bg_blur02-d31baee858618d362898042d1945995b2bb8dcc83c34e75aabcedfb600b378bd.jpg",
+    "application.js": "application-5ae51116e00f948ea48fd06f9f276e0d135ff08c37b4b87dc155f306fca205be.js",
+    "application.css": "application-5fa5430c470f610c05669af9e7191246e1371fe0fcd4ad2d5c39adde0a4dc788.css"
+  }
+}
