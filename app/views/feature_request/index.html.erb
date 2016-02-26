@@ -4,7 +4,7 @@
 
   </h1>
   <% if current_user.is_staff == 1 %>
-      <%= link_to "Add New Request", new_feature_request_path, class: 'add_new' %>
+      <%= link_to "Add Request", new_feature_request_path, class: 'add_new btn btn-success' %>
   <% end %>
   <% if @feature.blank? %>
       <p style="text-align: center; font-size: 18px;">No record found.</p>

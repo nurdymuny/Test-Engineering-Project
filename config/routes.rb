@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     root to: "feature_request#index"
     get 'staffs/staff_new' => 'staffs#staff_new', :as => 'staff_new'
     post 'staffs/registration_staff' => 'staffs#registration_staff', :as => 'registration_staff'
+    get 'staffs/sign_out' => 'staffs#logout', :as => 'staff_sign_out'
+
     get 'staffs/staff_list' => 'staffs#staff_list'
     get 'staffs/staff_edit/' => 'staffs#staff_edit'
     put 'staffs/update_staff' => 'staffs#update_staff', :via => [:put, :patch]

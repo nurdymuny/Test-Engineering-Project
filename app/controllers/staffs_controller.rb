@@ -3,16 +3,19 @@ class StaffsController < Devise::RegistrationsController
     build_resource({})
     yield resource if block_given?
     resource = User.new
+
   end
 
 
   def registration_staff
     require_params = sign_up_params
+    require_params[:is_staff] = 1
     build_resource(require_params)
     resource.save
-    resource.update_attribute(:is_staff, 1)
+    # resource.update_attribute(:is_staff, 1)
     yield resource if block_given?
     if resource.persisted?
+      flash[:notice] = "You have successfully registered a new staff member."
       redirect_to staffs_staff_list_path
     else
       clean_up_passwords resource
@@ -24,9 +27,8 @@ class StaffsController < Devise::RegistrationsController
     if current_user.is_staff == 0
       @staff = User.where("is_staff =1")
     else
-      @staff = User.where("is_staff =1").where("id = #{current_user.id}")
+      @staff = User.where("is_staff =1").where("id =#{current_user.id}")
     end
-
   end
 
   def staff_edit
@@ -53,8 +55,16 @@ class StaffsController < Devise::RegistrationsController
     end
   end
 
+  def logout
+    @staff = User.find_by_id(params[:id])
+    if @staff.present?
+      sign_out @staff
+      flash[:notice] = "Successfully Signed Out"
+      redirect_to new_user_session_path
+    end
+  end
   private
   def sign_up_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :joining_date)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :joining_date, :is_staff)
   end
 end

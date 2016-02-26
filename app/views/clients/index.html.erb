@@ -1,11 +1,11 @@
 
 <div>
 
-  <h1>
+  <h1>Clients
   </h1>
-  <%= link_to "Register", new_client_path, class: 'add_new btn btn-success' %>
 
-  <% if @clients.blank? %>
+  <% if current_user.present? and current_user.is_admin != nil %>
+      <% if @clients.blank? %>
       <p style="text-align: center; font-size: 18px;">No record found.</p>
   <% else %>
 
@@ -40,6 +40,9 @@
         </tr>
         </tbody>
       </table>
+  <% end %>
+  <% else %>
+      <%= link_to "Register", new_client_path, class: 'add_new btn btn-success' %>
   <% end %>
 </div>
 </div>
