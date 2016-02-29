@@ -15,7 +15,7 @@ class StaffsController < Devise::RegistrationsController
     # resource.update_attribute(:is_staff, 1)
     yield resource if block_given?
     if resource.persisted?
-      flash[:notice] = "You have successfully registered a new staff member."
+      # flash[:notice] = "You have successfully registered a new staff member."
       redirect_to staffs_staff_list_path
     else
       clean_up_passwords resource
